@@ -29,7 +29,7 @@ netmod:
 target_platform:
 - linux-ppc64le
 ucx:
-- '1.17'
+- '1.18'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
