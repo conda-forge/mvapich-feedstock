@@ -1,5 +1,5 @@
-About mvapich-feedstock
-=======================
+About shs-mvapich-feedstock
+===========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mvapich-feedstock/blob/main/LICENSE.txt)
 
@@ -9,23 +9,18 @@ Package license: BSD-3-Clause
 
 Summary: MVAPICH, a high-performance MPI library by The Ohio State University.
 
-MVAPICH is a high-performance implementation of the MPI (Message Passing Interface) standard.
-It provides enhancements including optimization for different networking technologies.
+SHS-MVAPICH is a high-performance implementation of the MPI (Message Passing Interface) standard
+with support for both Unified Communication X (UCX) and a version of the Open Fabric Interfaces (OFI)
+framework specifically adapted for Slingshot Host Software (SHS).
+
+If the actual *netmod* is not correctly recognized at run time you have to activate it using either
+`MPICH_CH4_NETMOD=ucx` or `MPICH_CH4_NETMOD=ofi`.
 
 
 The default value for `MV2_ENABLE_AFFINITY` is typically `1` (enabled). This setting binds MPI processes
 to specific CPU cores to improve performance due to cache locality and reduced context switching.
 In some environments, particularly those using the Slurm job scheduler, this may degrade performance
 or lead to unexpected behavior, and hence it may be beneficial to set `MV2_ENABLE_AFFINITY=0`.
-
-
-MVAPICH supports two high-level network modules (netmods), namely UCX and OFI:
-for the UCX netmod use `conda install conda-forge::mvapich=*=ucx*`, and
-for the OFI netmod `conda install conda-forge::mvapich=*=ofi*`.
-As an *experiment* it is also possible to select a particular version of LibFabric or UCX,
-for instance 1.15.2 with `conda install conda-forge::mvapich=*=ofi_1.15.2*`.
-
-These commands will install the MVAPICH package configured with the desired netmod.
 
 
 Note that the actual GNU compilers (i.e., `gcc_linux-64`, `gfortran_linux-64` and `gxx_linux-64` for `linux-64`, or
@@ -51,45 +46,24 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_netmodofi-2.2.0</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_netmodofi-2.2.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_netmoducx-1.19.0</td>
+              <td>linux_aarch64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_netmoducx-1.19.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_netmodofi-2.2.0</td>
+              <td>linux_ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_netmodofi-2.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_netmoducx-1.19.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_netmoducx-1.19.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_netmodofi-2.2.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_netmodofi-2.2.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_netmoducx-1.19.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_netmoducx-1.19.0" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -105,53 +79,53 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-mvapich-green.svg)](https://anaconda.org/conda-forge/mvapich) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/mvapich.svg)](https://anaconda.org/conda-forge/mvapich) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/mvapich.svg)](https://anaconda.org/conda-forge/mvapich) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/mvapich.svg)](https://anaconda.org/conda-forge/mvapich) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-shs--mvapich-green.svg)](https://anaconda.org/conda-forge/shs-mvapich) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/shs-mvapich.svg)](https://anaconda.org/conda-forge/shs-mvapich) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/shs-mvapich.svg)](https://anaconda.org/conda-forge/shs-mvapich) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/shs-mvapich.svg)](https://anaconda.org/conda-forge/shs-mvapich) |
 
-Installing mvapich
-==================
+Installing shs-mvapich
+======================
 
-Installing `mvapich` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `shs-mvapich` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `mvapich` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `shs-mvapich` can be installed with `conda`:
 
 ```
-conda install mvapich
-```
-
-or with `mamba`:
-
-```
-mamba install mvapich
-```
-
-It is possible to list all of the versions of `mvapich` available on your platform with `conda`:
-
-```
-conda search mvapich --channel conda-forge
+conda install shs-mvapich
 ```
 
 or with `mamba`:
 
 ```
-mamba search mvapich --channel conda-forge
+mamba install shs-mvapich
+```
+
+It is possible to list all of the versions of `shs-mvapich` available on your platform with `conda`:
+
+```
+conda search shs-mvapich --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search shs-mvapich --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search mvapich --channel conda-forge
+mamba repoquery search shs-mvapich --channel conda-forge
 
-# List packages depending on `mvapich`:
-mamba repoquery whoneeds mvapich --channel conda-forge
+# List packages depending on `shs-mvapich`:
+mamba repoquery whoneeds shs-mvapich --channel conda-forge
 
-# List dependencies of `mvapich`:
-mamba repoquery depends mvapich --channel conda-forge
+# List dependencies of `shs-mvapich`:
+mamba repoquery depends shs-mvapich --channel conda-forge
 ```
 
 
@@ -196,17 +170,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating mvapich-feedstock
-==========================
+Updating shs-mvapich-feedstock
+==============================
 
-If you would like to improve the mvapich recipe or build a new
+If you would like to improve the shs-mvapich recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/mvapich-feedstock are
+Note that all branches in the conda-forge/shs-mvapich-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
