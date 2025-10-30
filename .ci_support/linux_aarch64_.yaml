@@ -27,7 +27,7 @@ libcurl:
 libhwloc:
 - 2.12.1
 rdma_core:
-- '59'
+- '60'
 target_platform:
 - linux-aarch64
 ucx:
