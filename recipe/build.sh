@@ -80,7 +80,7 @@ make install-exec install-data
 
 cd ../mvapich
 
-export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH"
+unset PKG_CONFIG_PATH
 
 ./configure --prefix=$PREFIX \
             --with-sysroot=${CONDA_BUILD_SYSROOT} \
