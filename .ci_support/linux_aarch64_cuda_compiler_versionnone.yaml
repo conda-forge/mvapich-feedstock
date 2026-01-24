@@ -10,6 +10,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler_version:
+- none
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -27,9 +29,9 @@ libcurl:
 libhwloc:
 - 2.12.2
 rdma_core:
-- '60'
+- '61'
 target_platform:
-- linux-64
+- linux-aarch64
 ucx:
 - '1.20'
 zip_keys:

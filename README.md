@@ -3,17 +3,40 @@ About mvapich-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/mvapich-feedstock/blob/main/LICENSE.txt)
 
+
+About mvapich
+-------------
+
 Home: https://mvapich.cse.ohio-state.edu/
 
-Package license: BSD-3-Clause AND MIT AND (BSD-2-Clause OR GPL-2.0-only)
+Package license: BSD-3-Clause AND (BSD-2-Clause OR GPL-2.0-only) AND MIT
 
 Summary: MVAPICH, a high-performance MPI library by The Ohio State University.
 
 MVAPICH is a high-performance implementation of the MPI (Message Passing Interface) standard
 with support for **both** Unified Communication X (UCX) and Open Fabric Interfaces (OFI).
 
-The MVAPICH-SHS variant comes with the CXI provider support for Slingshot Host Systems and
-the `_cuda` version was build with CUDA 12 support (use `MPIR_CVAR_ENABLE_GPU=0` to *disable* it).
+The `_shs` variant comes with the CXI provider support for Slingshot Host Systems (use `export FI_PROVIDER=cxi` to *enable* it).
+The `_cuda` variant includes CUDA support (use `MPIR_CVAR_ENABLE_GPU=0` to *disable* it).
+
+In case the actual *netmod* is not correctly recognized at run time, activate it using either
+`MPICH_CH4_NETMOD=ucx` or `MPICH_CH4_NETMOD=ofi`.
+
+
+About mvapich
+-------------
+
+Home: https://mvapich.cse.ohio-state.edu/
+
+Package license: BSD-3-Clause AND (BSD-2-Clause OR GPL-2.0-only)
+
+Summary: MVAPICH, a high-performance MPI library by The Ohio State University.
+
+MVAPICH is a high-performance implementation of the MPI (Message Passing Interface) standard
+with support for **both** Unified Communication X (UCX) and Open Fabric Interfaces (OFI).
+
+The `_shs` variant comes with the CXI provider support for Slingshot Host Systems (use `export FI_PROVIDER=cxi` to *enable* it).
+The `_cuda` variant includes CUDA support (use `MPIR_CVAR_ENABLE_GPU=0` to *disable* it).
 
 In case the actual *netmod* is not correctly recognized at run time, activate it using either
 `MPICH_CH4_NETMOD=ucx` or `MPICH_CH4_NETMOD=ofi`.
@@ -37,17 +60,31 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64</td>
+              <td>linux_64_cuda_compiler_version12.6</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_version12.6" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64</td>
+              <td>linux_64_cuda_compiler_versionnone</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_cuda_compiler_versionnone" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_version12.6</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_version12.6" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_cuda_compiler_versionnone</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=23590&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/mvapich-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_cuda_compiler_versionnone" alt="variant">
                 </a>
               </td>
             </tr>
