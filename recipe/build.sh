@@ -27,42 +27,33 @@ if [[ $CONDA_BUILD_CROSS_COMPILATION == 1 ]]; then
   fi
 fi
 
-export CUDA_HOME="${PREFIX}/targets/x86_64-linux"
-if [[ "$target_platform" == "linux-aarch64" ]]; then
-  export CUDA_HOME="${PREFIX}/targets/sbsa-linux"
-fi
-
 export CPPFLAGS="-I$PREFIX/include"
 export CFLAGS="-I$PREFIX/include"
 export CXXFLAGS="-I$PREFIX/include"
-export FFLAGS="-I$PREFIX/include -fallow-argument-mismatch"
-export FCFLAGS="-I$PREFIX/include -fallow-argument-mismatch"
-export LDFLAGS="-L$PREFIX/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs -Wl,-rpath,$PREFIX/lib -Wl,-rpath-link,$PREFIX/lib:${CUDA_HOME}/lib"
+export FFLAGS="-I$PREFIX/include"
+export FCFLAGS="-I$PREFIX/include"
 
-export PATH="${PREFIX}/bin:${CUDA_HOME}/bin:${CUDA_HOME}/nvvm/bin:${PATH}" 
-export LIBRARY_PATH="${CUDA_HOME}/lib:$PREFIX/lib:${LIBRARY_PATH}"
-export LD_LIBRARY_PATH="${CUDA_HOME}/lib:$LD_LIBRARY_PATH"
+# Conditionally add -fallow-argument-mismatch for gfortran >=10
+if [[ "$(uname)" == "Linux" ]] || [[ "$(uname)" == "Darwin" ]]; then
+  GFORTRAN_VERSION=$("${FC}" -dumpversion | cut -d. -f1)
+  if [[ "${GFORTRAN_VERSION}" -ge 10 ]]; then
+    export FFLAGS="${FFLAGS} -fallow-argument-mismatch"
+    export FCFLAGS="${FCFLAGS} -fallow-argument-mismatch"
+  fi
+fi
 
-cd gdrcopy
+export LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -Wl,-rpath-link,$PREFIX/lib"
 
-sed -i "s/gcc/gcc/g" config_arch
-make prefix=${PREFIX} SYSROOT=${CONDA_BUILD_SYSROOT} lib lib_install
-ls -la ${PREFIX}/lib/libgdrapi*
-
-cd ../shs-libfabric
+cd shs-libfabric
 
 autoreconf -ivf
 
 ./configure --prefix=${PREFIX} \
             --with-sysroot=${CONDA_BUILD_SYSROOT} \
-            --enable-cuda-dlopen \
             --enable-cxi \
-            --enable-gdrcopy-dlopen \
             --with-cassini-headers=${PREFIX} \
-            --with-cuda=${CUDA_HOME} \
             --with-cxi-uapi-headers=${PREFIX} \
             --with-curl=${PREFIX} \
-            --with-gdrcopy=${PREFIX} \
             --with-json-c=${PREFIX} \
             --with-libnl=${PREFIX} \
             --docdir=$PWD/noinst/doc \
@@ -88,8 +79,6 @@ unset PKG_CONFIG_PATH
             --enable-nemesis-shm-collectives \
             --enable-romio \
             --enable-static=no \
-            --with-cuda=${CUDA_HOME} \
-            --with-cuda-sm=90 \
             --with-device=ch4:ucx,ofi \
             --with-libfabric=$PREFIX \
             --with-libfabric-include=$PREFIX/include \
@@ -103,9 +92,3 @@ unset PKG_CONFIG_PATH
 make -j"${CPU_COUNT}"
 
 make install
-
-for CHANGE in "activate" "deactivate"
-  do
-    mkdir -p "${PREFIX}/etc/conda/${CHANGE}.d"
-    cp "${RECIPE_DIR}/${CHANGE}.sh" "${PREFIX}/etc/conda/${CHANGE}.d/${PKG_NAME}_${CHANGE}.sh"
-  done
