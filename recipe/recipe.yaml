@@ -2,9 +2,9 @@ schema_version: 1
 
 context:
   mvapich_version: "4.1"
-  shs_libfabric_version: "2.2.0"
+  shs_libfabric_version: "14.0.1"
   ucx_version: "1.20.0"
-  build: 20
+  build: 21
 
 package:
   name: mvapich
@@ -16,8 +16,8 @@ source:
     target_directory: mvapich
     patches:
       - fix_ucr_domain.patch
-  - url: https://github.com/HewlettPackard/shs-libfabric/archive/refs/tags/v${{ shs_libfabric_version }}.tar.gz
-    sha256: 734aa46fc1a5c69c59514aade3e8f17037506fbb08013f4be63d669e546570b0
+  - url: https://github.com/HewlettPackard/shs-libfabric/archive/refs/tags/release/shs-${{ shs_libfabric_version }}.tar.gz
+    sha256: 993e371639dbbf5c36d9e43a5c082742463c5cc471c08bd76575eb3918c2b57d
     target_directory: shs-libfabric
     patches:
       - fix_reallocarray.patch
