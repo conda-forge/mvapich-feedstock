@@ -1,3 +1,5 @@
+DOCKER_PLATFORM:
+- linux/aarch64
 c_compiler:
 - gcc
 c_compiler_version:
@@ -21,11 +23,11 @@ fortran_compiler:
 fortran_compiler_version:
 - '13'
 json_c:
-- '0.18'
+- '0.19'
 libcurl:
 - '8'
 libhwloc:
-- 2.15.0
+- 2.13.0
 rdma_core:
 - '65'
 target_platform:
