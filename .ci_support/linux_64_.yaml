@@ -27,7 +27,7 @@ json_c:
 libcurl:
 - '8'
 libhwloc:
-- 2.13.0
+- 2.15.0
 rdma_core:
 - '65'
 target_platform:
